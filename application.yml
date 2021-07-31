@@ -1,0 +1,45 @@
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka,http://127.0.0.1:8762/eureka
+spring:
+  application:
+    name: apolloOrder
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:7070
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 4000
+        readTimeout: 6000
+  hystrix:
+   enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000 #默认连接超时时间是1秒
+
+
+APOLLOUSER:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#    Ribbon中使用Eureka。
+ribbon:
+  eureka:
+    enabled: true
+
+
+
+
+
